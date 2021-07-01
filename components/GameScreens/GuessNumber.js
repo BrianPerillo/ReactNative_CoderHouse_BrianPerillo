@@ -61,8 +61,8 @@ const GuessNumber = ({ number, setConfirmedNumber, setGuessNumber, setRound }) =
 
               <View style={styles.FloatButtons}>
 
-                <Button style={styles.Button}  title="Menor" color={Colors.primary}  onPress={() => handleOnPressPista('menor')}/>
-                <Button style={styles.Button} title="Mayor" color={Colors.secondary} onPress={() => handleOnPressPista('mayor')}/>
+                <Button style={styles.Button}  title="Menor"  onPress={() => handleOnPressPista('menor')}/>
+                <Button style={styles.Button} title="Mayor" onPress={() => handleOnPressPista('mayor')}/>
 
               </View>
               
