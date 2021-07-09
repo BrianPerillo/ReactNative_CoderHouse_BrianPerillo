@@ -2,6 +2,7 @@ import { Button, FlatList, Image, Modal, Pressable, ScrollView, StyleSheet, Swit
 import React, {Fragment, useEffect, useState} from 'react';
 
 import AppLoading from 'expo-app-loading';
+import BreadNavigation from './navigation/BreadNavigation';
 import Colors from './stylesJS/Colors';
 import GuessNumber from './components/GameScreens/GuessNumber';
 import Header from './components/Header';
@@ -36,25 +37,28 @@ export default function App() {
 
   return (
 
-    !dataLoaded ? 
+    // !dataLoaded ? 
 
-      <AppLoading />
+    //   <AppLoading />
 
-    : 
+    // : 
     
-    <View style={styles.screen}>
+    // <View style={styles.screen}>
 
-      <View>
-        <Header title={title}/>
-      </View>
+    //   <View>
+    //     <Header title={title}/>
+    //   </View>
 
-      <View style={styles.Content}>
+    //   <View style={styles.Content}>
         
-        {inicio}
+    //     {inicio}
 
-      </View>
+    //   </View>
 
-    </View>
+    // </View>
+
+    
+    <BreadNavigation/>
 
   );
 }
