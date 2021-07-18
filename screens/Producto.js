@@ -3,10 +3,13 @@ import * as React from 'react';
 import {Button, Image, StyleSheet, Text, View} from 'react-native';
 
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
+import { useSelector } from 'react-redux';
 
 const Producto = ({navigation, route}) => {
 
-    const item = route.params.item;
+    // const item = route.params.item;
+
+    const item = useSelector(state => state.products.selected) || {};
 
     return ( 
 

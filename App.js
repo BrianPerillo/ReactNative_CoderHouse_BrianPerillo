@@ -6,8 +6,10 @@ import BreadNavigation from './navigation/BreadNavigation';
 import Colors from './stylesJS/Colors';
 import GuessNumber from './components/GameScreens/GuessNumber';
 import Header from './components/Header';
+import { Provider } from 'react-redux';
 import StartGameScreen from './components/StartGameScreen';
 import { StatusBar } from 'expo-status-bar';
+import store from './store';
 import { useFonts } from 'expo-font';
 
 export default function App() {
@@ -23,7 +25,7 @@ export default function App() {
   
     if(!confirmedNumber && round==0) {
        inicio = <StartGameScreen  setConfirmedNumber={setConfirmedNumber} />
-    } 
+    }
     else{
       inicio = <GuessNumber number={confirmedNumber} setConfirmedNumber={setConfirmedNumber} setGuessNumber={setGuessNumber} setRound={setRound}/>
     }
@@ -37,28 +39,9 @@ export default function App() {
 
   return (
 
-    // !dataLoaded ? 
-
-    //   <AppLoading />
-
-    // : 
-    
-    // <View style={styles.screen}>
-
-    //   <View>
-    //     <Header title={title}/>
-    //   </View>
-
-    //   <View style={styles.Content}>
-        
-    //     {inicio}
-
-    //   </View>
-
-    // </View>
-
-    
-    <BreadNavigation/>
+    <Provider store={store}>
+      <BreadNavigation/>
+    </Provider>
 
   );
 }

@@ -1,139 +1,22 @@
 import * as React from 'react';
 
 import {Button, FlatList, Image, Pressable, StyleSheet, Text, TextInput, View} from 'react-native';
+import { useEffect, useState } from 'react';
 
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
+import { findCurrentItem } from '../store/actions/findCurrentItem';
+import { items } from '../data/products';
+import { useDispatch } from 'react-redux';
 
 const Home = ({navigation}) => {
 
-    const items = [
-        {
-            id: Math.random(),
-            name: 'Remera',
-            img: 'https://tse1.mm.bing.net/th?id=OIP.7BlM7tXxR7Sbl2V_7Z05_QHaHa&pid=Api&P=0&w=300&h=300',
-            description: 'Descripción Remera',
-            price: 4200,
-        },
-        {
-            id: Math.random(),
-            name: 'Zapatilla',
-            img: 'https://tse1.mm.bing.net/th?id=OIP.CKWtV1UnAJO5COmEXTI6tAHaHa&pid=Api&P=0&w=300&h=300',
-            description: 'Descripción Zapatilla',
-            price: 12500,            
-        },
-        {
-            id: Math.random(),
-            name: 'Pantalón',
-            img: 'https://tse1.mm.bing.net/th?id=OIP.sSMFxh__RSpSoFIHraTAtQHaHa&pid=Api&P=0&w=300&h=300',
-            description: 'Descripción Pantalón',
-            price: 6000,
-        },
-        {
-            id: Math.random(),
-            name: 'Remera',
-            img: 'https://tse1.mm.bing.net/th?id=OIP.7BlM7tXxR7Sbl2V_7Z05_QHaHa&pid=Api&P=0&w=300&h=300',
-            description: 'Descripción Remera',
-            price: 4200,
-        },
-        {
-            id: Math.random(),
-            name: 'Zapatilla',
-            img: 'https://tse1.mm.bing.net/th?id=OIP.CKWtV1UnAJO5COmEXTI6tAHaHa&pid=Api&P=0&w=300&h=300',
-            description: 'Descripción Zapatilla',
-            price: 12500,            
-        },
-        {
-            id: Math.random(),
-            name: 'Pantalón',
-            img: 'https://tse1.mm.bing.net/th?id=OIP.sSMFxh__RSpSoFIHraTAtQHaHa&pid=Api&P=0&w=300&h=300',
-            description: 'Descripción Pantalón',
-            price: 6000,
-        },
-        {
-            id: Math.random(),
-            name: 'Remera',
-            img: 'https://tse1.mm.bing.net/th?id=OIP.7BlM7tXxR7Sbl2V_7Z05_QHaHa&pid=Api&P=0&w=300&h=300',
-            description: 'Descripción Remera',
-            price: 4200,
-        },
-        {
-            id: Math.random(),
-            name: 'Zapatilla',
-            img: 'https://tse1.mm.bing.net/th?id=OIP.CKWtV1UnAJO5COmEXTI6tAHaHa&pid=Api&P=0&w=300&h=300',
-            description: 'Descripción Zapatilla',
-            price: 12500,            
-        },
-        {
-            id: Math.random(),
-            name: 'Pantalón',
-            img: 'https://tse1.mm.bing.net/th?id=OIP.sSMFxh__RSpSoFIHraTAtQHaHa&pid=Api&P=0&w=300&h=300',
-            description: 'Descripción Pantalón',
-            price: 6000,
-        },
-        {
-            id: Math.random(),
-            name: 'Remera',
-            img: 'https://tse1.mm.bing.net/th?id=OIP.7BlM7tXxR7Sbl2V_7Z05_QHaHa&pid=Api&P=0&w=300&h=300',
-            description: 'Descripción Remera',
-            price: 4200,
-        },
-        {
-            id: Math.random(),
-            name: 'Zapatilla',
-            img: 'https://tse1.mm.bing.net/th?id=OIP.CKWtV1UnAJO5COmEXTI6tAHaHa&pid=Api&P=0&w=300&h=300',
-            description: 'Descripción Zapatilla',
-            price: 12500,            
-        },
-        {
-            id: Math.random(),
-            name: 'Pantalón',
-            img: 'https://tse1.mm.bing.net/th?id=OIP.sSMFxh__RSpSoFIHraTAtQHaHa&pid=Api&P=0&w=300&h=300',
-            description: 'Descripción Pantalón',
-            price: 6000,
-        },
-        {
-            id: Math.random(),
-            name: 'Remera',
-            img: 'https://tse1.mm.bing.net/th?id=OIP.7BlM7tXxR7Sbl2V_7Z05_QHaHa&pid=Api&P=0&w=300&h=300',
-            description: 'Descripción Remera',
-            price: 4200,
-        },
-        {
-            id: Math.random(),
-            name: 'Zapatilla',
-            img: 'https://tse1.mm.bing.net/th?id=OIP.CKWtV1UnAJO5COmEXTI6tAHaHa&pid=Api&P=0&w=300&h=300',
-            description: 'Descripción Zapatilla',
-            price: 12500,            
-        },
-        {
-            id: Math.random(),
-            name: 'Pantalón',
-            img: 'https://tse1.mm.bing.net/th?id=OIP.sSMFxh__RSpSoFIHraTAtQHaHa&pid=Api&P=0&w=300&h=300',
-            description: 'Descripción Pantalón',
-            price: 6000,
-        },
-        {
-            id: Math.random(),
-            name: 'Remera',
-            img: 'https://tse1.mm.bing.net/th?id=OIP.7BlM7tXxR7Sbl2V_7Z05_QHaHa&pid=Api&P=0&w=300&h=300',
-            description: 'Descripción Remera',
-            price: 4200,
-        },
-        {
-            id: Math.random(),
-            name: 'Zapatilla',
-            img: 'https://tse1.mm.bing.net/th?id=OIP.CKWtV1UnAJO5COmEXTI6tAHaHa&pid=Api&P=0&w=300&h=300',
-            description: 'Descripción Zapatilla',
-            price: 12500,            
-        },
-        {
-            id: Math.random(),
-            name: 'Pantalón',
-            img: 'https://tse1.mm.bing.net/th?id=OIP.sSMFxh__RSpSoFIHraTAtQHaHa&pid=Api&P=0&w=300&h=300',
-            description: 'Descripción Pantalón',
-            price: 6000,
-        },        
-    ]
+    const dispatch = useDispatch();
+
+    const handleOnPress = (product) => {
+        console.log(product.id);
+        dispatch(findCurrentItem(product.id));
+        navigation.navigate('Producto', { name: product.name }); 
+    }
 
     return ( 
 
@@ -145,7 +28,8 @@ const Home = ({navigation}) => {
             data={items} 
             renderItem={data => {
             return (
-                <Pressable onPress={()=>navigation.navigate('Producto', {item: data.item} )}>
+                // <Pressable onPress={()=>navigation.navigate('Producto', {item: data.item} )}>
+                <Pressable onPress={() => handleOnPress(data.item)}>
                     <View style={styles.productCard}>
                         <Image style={{height:80, width:80}} source={{uri: data.item.img}}/>
                         <Text style={{fontSize:16}}>{data.item.name}</Text>
