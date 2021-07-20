@@ -49,7 +49,7 @@ const Home = ({navigation}) => {
           </View> */}
 
           <SearchBar
-            placeholder="Type Here..."
+            placeholder="Buscá un producto..."
             onChangeText={text => handleOnChangeText(text)}
             value={search}
             lightTheme='default'
