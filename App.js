@@ -22,13 +22,6 @@ export default function App() {
     'open-sans': require('./assets/fonts/OpenSans-Regular.ttf'),
     'open-sans-bold': require('./assets/fonts/OpenSans-Bold.ttf'),
   })
-  
-    if(!confirmedNumber && round==0) {
-       inicio = <StartGameScreen  setConfirmedNumber={setConfirmedNumber} />
-    }
-    else{
-      inicio = <GuessNumber number={confirmedNumber} setConfirmedNumber={setConfirmedNumber} setGuessNumber={setGuessNumber} setRound={setRound}/>
-    }
 
 
   useEffect(() => {

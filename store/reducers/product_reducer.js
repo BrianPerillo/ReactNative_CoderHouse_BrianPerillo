@@ -15,7 +15,7 @@ const ProductReducer = (state = INITIAL_STATE, action) => {
             const productIndex = state.products.findIndex(product => product.id === action.productID) //Filtro el producto
             if (productIndex === -1) 
                 return { ...state };//Si findIndex da -1 es porque no encontró el producto por lo tanto no se aplica el filtro. Retornamos nuevo estado igual al inicial
-            return { //Si no da -1, (econntró el producto) entonces guardamos el index del prod en el atributo selected.
+            return { //Si no da -1, (econtró el producto) entonces guardamos el index del prod en el atributo selected.
                 ...state,
                 selected: state.products[productIndex],
             };

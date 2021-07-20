@@ -9,7 +9,7 @@ const Producto = ({navigation, route}) => {
 
     // const item = route.params.item;
 
-    const item = useSelector(state => state.products.selected) || {};
+    const item = useSelector(state => state.product.selected) || {};
 
     return ( 
 
