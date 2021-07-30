@@ -10,30 +10,17 @@ import { createStackNavigator } from '@react-navigation/stack';
 const BreadNavigation = () => {
 
     const Stack = createStackNavigator();
-
-    const MyTheme = {
-        ...DefaultTheme,
-        colors: {
-          ...DefaultTheme.colors,
-          primary: 'rgb(255, 45, 85)',
-          background: 'red',
-        },
-      };
       
     return ( 
 
-        <NavigationContainer theme={MyTheme}>
+        <Stack.Navigator>
 
-            <Stack.Navigator>
+            {/* Por defecto el name de la screen lo va a tomar para el título de la pantalla, pero sino podemos usar el atributo options con 
+                y pasarle un title: 'X' para que ese sea el título y name ponerle otra cosa */}
+            <Stack.Screen  name="Home" component={Home} options={{ title: 'Inicio'}}/>
+            <Stack.Screen  name="Producto" component={Producto} options={{ title: 'Producto'}}/>
 
-                {/* Por defecto el name de la screen lo va a tomar para el título de la pantalla, pero sino podemos usar el atributo options con 
-                    y pasarle un title: 'X' para que ese sea el título y name ponerle otra cosa */}
-                <Stack.Screen  name="Home" component={Home} options={{ title: 'Inicio'}}/>
-                <Stack.Screen  name="Producto" component={Producto} options={{ title: 'Producto'}}/>
-
-            </Stack.Navigator>
-
-        </NavigationContainer>
+        </Stack.Navigator>
 
      );
 

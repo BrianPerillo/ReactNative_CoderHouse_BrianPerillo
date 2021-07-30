@@ -86,6 +86,7 @@ const styles = StyleSheet.create({
     screen: {
         backgroundColor: '#F0F0F0',
         flex: 1,
+        paddingTop:50,
     },
     searchSection: {
         flex: 0,

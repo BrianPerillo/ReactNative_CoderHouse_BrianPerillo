@@ -6,6 +6,7 @@ import BreadNavigation from './navigation/BreadNavigation';
 import Colors from './stylesJS/Colors';
 import GuessNumber from './components/GameScreens/GuessNumber';
 import Header from './components/Header';
+import MainNavigator from './navigation';
 import { Provider } from 'react-redux';
 import StartGameScreen from './components/StartGameScreen';
 import { StatusBar } from 'expo-status-bar';
@@ -33,7 +34,7 @@ export default function App() {
   return (
 
     <Provider store={store}>
-      <BreadNavigation/>
+      <MainNavigator/>
     </Provider>
 
   );
