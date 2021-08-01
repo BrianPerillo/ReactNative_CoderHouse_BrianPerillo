@@ -39,13 +39,14 @@ export const signup = (email, password) => {
 }
 
 export const login = (email, password) => {
+
   return async dispatch => {
     const response = await fetch(URL_AUTH_LOGIN, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify({
+      body: JSON.stringify({ //JSON.stringify convierte un objeto de JavaScript a JSON
         email,
         password,
         returnSecureToken: true,
@@ -54,7 +55,9 @@ export const login = (email, password) => {
 
     if (!response.ok) throw new Error('No se pudo acceder');
 
-    const resData = await response.json();
+    const resData = await response.json();//Convierte de formato json a objeto de JavaScript
+    
     dispatch({ type: LOGIN, token: resData.idToken, user: resData.localId });
   }
+  
 }

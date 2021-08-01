@@ -1,19 +1,32 @@
 import * as React from 'react';
 
 import {Button, Image, StyleSheet, Text, View} from 'react-native';
+import { useDispatch, useSelector } from 'react-redux';
 
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
-import { useSelector } from 'react-redux';
+import { addItem } from '../store/actions/cart.action';
 
 const Producto = ({navigation, route}) => {
 
     // const item = route.params.item;
 
     const item = useSelector(state => state.product.selected) || {};
+    const userId = useSelector(state => state.auth.user) || {}; 
+    const items = useSelector(state => state.cart.items) || {}; 
+
+    const dispatch = useDispatch();
+
+    const handleOnPressAddToCart = () => {
+
+        dispatch(addItem(item,items,userId))
+
+    }
+
 
     return ( 
 
         <View style={styles.screen}>
+
             <View style={styles.mainCard}>
                 <Image style={{width:150, height:150, alignSelf:'center'}} source={{uri:item.img}}/>
                 {/* <Text>ID: {item.id}</Text> */}
@@ -22,12 +35,18 @@ const Producto = ({navigation, route}) => {
                     <Text style={styles.productPrice}>{item.price}</Text>
                 </View>
             </View>
+
             <View style={styles.descriptionCard}>
                 <Text>Descripción</Text>
                 <View style={styles.description}>
                     <Text>{item.description}</Text>
                 </View>
             </View>
+            <Text>{userId}</Text>
+            <View>
+                <Button title="Agregar al Carrito" onPress={handleOnPressAddToCart} />
+            </View>
+
         </View>
 
      );
@@ -38,10 +57,11 @@ const Producto = ({navigation, route}) => {
 const styles = StyleSheet.create({
     
     screen: {
-        padding: 30,
+        paddingTop:50,
         backgroundColor: 'white',
-        flex: 1, 
-        alignItems:'center'
+        flex: 0.9, 
+        alignItems:'center',
+        justifyContent:'space-around',
     },
     mainCard:{
         // backgroundColor:'gray',
@@ -56,7 +76,7 @@ const styles = StyleSheet.create({
         alignItems:'center',
     },
     descriptionCard: {
-        marginTop:20,
+        marginTop:-50,
         width: '100%',
         borderRadius: 3,
     },
