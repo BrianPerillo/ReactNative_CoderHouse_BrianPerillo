@@ -1,8 +1,7 @@
 import { DefaultTheme, NavigationContainer } from '@react-navigation/native';
-import React, { useEffect, useState } from 'react';
 
 import AuthNavigation from './AuthNavigation';
-import BreadNavigation from './BreadNavigation';
+import React from 'react';
 import Tab from './Tab';
 import { useSelector } from 'react-redux';
 
@@ -26,6 +25,7 @@ const MainNavigator = () => {
             {
                 loggedIn ? 
                     <Tab/>
+                   
                 : 
                     <AuthNavigation />
             }

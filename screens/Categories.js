@@ -1,53 +1,64 @@
-import {  } from '../store/actions/ProductsAction';
-
 import * as React from 'react';
 
 import {Button, FlatList, Image, Pressable, StyleSheet, Text, TextInput, View} from 'react-native';
-import { findCurrentCategoryItems, findCurrentItem, findItemsByName } from '../store/actions/ProductsAction';
 import { useEffect, useState } from 'react';
 
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
 import Icon from "react-native-vector-icons/Ionicons";
 import { Ionicons } from '@expo/vector-icons';
 import { SearchBar } from 'react-native-elements';
-import { categories } from '../data/categories';
+import { findCurrentItem } from '../store/actions/ProductsAction';
+import { findItemsByName } from '../store/actions/findItemsByName';
 import { items } from '../data/products';
 import { useDispatch } from 'react-redux';
 import { useSelector } from 'react-redux';
 
-const Home = ({navigation}) => {
+const Categories = ({navigation}) => {
 
     const [search, setSearch] = useState('');
 
     const dispatch = useDispatch();
 
-    const handleOnPress = (category) => {
-        console.log(category.name);
-        dispatch(findCurrentCategoryItems(category.name));
-        navigation.navigate('Productos', { name: category.name }); 
+    const handleOnPress = (product) => {
+        // console.log(product.id);
+        // dispatch(findCurrentItem(product.id));
+        // navigation.navigate('Producto', { name: product.name }); 
     }
 
-    // const handleOnChangeText = (text) => {     
-    //     setSearch(text);
-    //     dispatch(findItemsByName(text));
-    // }
+    const handleOnChangeText = (text) => {     
+        setSearch(text);
+        dispatch(findItemsByName(text));
+    }
 
+    const items = useSelector(state => state.filtered_products_by_name.filtered_products) || {}
 
     return (
 
         <View style={styles.screen}>
 
-                      
+          {/* <View style={styles.searchSection}>
+            <Icon
+                style={styles.searchIcon}
+                name="md-search"
+                color="#ccc"
+                size={25}
+            />
+            <TextInput 
+            placeholder="Buscar por nombre de producto"
+            style={styles.input}
+            onChangeText={text => handleOnChangeText(text)} />
+          </View> */}
+
           <SearchBar
             placeholder="Buscá un producto..."
-            // onChangeText={text => handleOnChangeText(text)}
+            onChangeText={text => handleOnChangeText(text)}
             value={search}
             // lightTheme='default'
             showLoading
-            />
+        />
 
           <FlatList
-            data={categories} 
+            data={items} 
             renderItem={data => {
             return (
                 // <Pressable onPress={()=>navigation.navigate('Producto', {item: data.item} )}>
@@ -110,5 +121,5 @@ const styles = StyleSheet.create({
 
   });
 
-export default Home;
+export default Categories;
 

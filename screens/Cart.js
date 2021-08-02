@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import React from 'react';
 import { deleteItem } from '../store/actions/cart.action';
-import { findCurrentItem } from '../store/actions/findCurrentItem';
+import { findCurrentItem } from '../store/actions/ProductsAction';
 
 const Cart = ({navigation}) => {
   
@@ -26,7 +26,7 @@ const Cart = ({navigation}) => {
 
         console.log(product.id);
         dispatch(findCurrentItem(product.id));
-        navigation.navigate('Producto', { name: product.name }); 
+        navigation.navigate('Detalle Producto', { name: "Zapatilla"}); 
         
     } 
 

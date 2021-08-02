@@ -18,10 +18,10 @@ const Producto = ({navigation, route}) => {
 
     const handleOnPressAddToCart = () => {
 
+        console.log("AGREGAR");
         dispatch(addItem(item,items,userId))
 
     }
-
 
     return ( 
 

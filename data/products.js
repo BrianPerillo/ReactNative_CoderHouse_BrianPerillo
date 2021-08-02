@@ -1,6 +1,7 @@
 export const items = [
     {
         id: Math.random(),
+        category: 'Remeras',
         name: 'Remera',
         img: 'https://tse1.mm.bing.net/th?id=OIP.7BlM7tXxR7Sbl2V_7Z05_QHaHa&pid=Api&P=0&w=300&h=300',
         description: 'Descripción Remera',
@@ -8,6 +9,7 @@ export const items = [
     },
     {
         id: Math.random(),
+        category: 'Zapatillas',
         name: 'Zapatilla',
         img: 'https://tse1.mm.bing.net/th?id=OIP.CKWtV1UnAJO5COmEXTI6tAHaHa&pid=Api&P=0&w=300&h=300',
         description: 'Descripción Zapatilla',
@@ -15,6 +17,7 @@ export const items = [
     },
     {
         id: Math.random(),
+        category: 'Pantalones',
         name: 'Pantalón',
         img: 'https://tse1.mm.bing.net/th?id=OIP.sSMFxh__RSpSoFIHraTAtQHaHa&pid=Api&P=0&w=300&h=300',
         description: 'Descripción Pantalón',
@@ -22,6 +25,7 @@ export const items = [
     },
     {
         id: Math.random(),
+        category: 'Remeras',
         name: 'Remera',
         img: 'https://tse1.mm.bing.net/th?id=OIP.7BlM7tXxR7Sbl2V_7Z05_QHaHa&pid=Api&P=0&w=300&h=300',
         description: 'Descripción Remera',
@@ -29,6 +33,7 @@ export const items = [
     },
     {
         id: Math.random(),
+        category: 'Zapatillas',
         name: 'Zapatilla',
         img: 'https://tse1.mm.bing.net/th?id=OIP.CKWtV1UnAJO5COmEXTI6tAHaHa&pid=Api&P=0&w=300&h=300',
         description: 'Descripción Zapatilla',
@@ -36,6 +41,7 @@ export const items = [
     },
     {
         id: Math.random(),
+        category: 'Pantalones',
         name: 'Pantalón',
         img: 'https://tse1.mm.bing.net/th?id=OIP.sSMFxh__RSpSoFIHraTAtQHaHa&pid=Api&P=0&w=300&h=300',
         description: 'Descripción Pantalón',
@@ -43,6 +49,7 @@ export const items = [
     },
     {
         id: Math.random(),
+        category: 'Remeras',
         name: 'Remera',
         img: 'https://tse1.mm.bing.net/th?id=OIP.7BlM7tXxR7Sbl2V_7Z05_QHaHa&pid=Api&P=0&w=300&h=300',
         description: 'Descripción Remera',
@@ -50,6 +57,7 @@ export const items = [
     },
     {
         id: Math.random(),
+        category: 'Zapatillas',
         name: 'Zapatilla',
         img: 'https://tse1.mm.bing.net/th?id=OIP.CKWtV1UnAJO5COmEXTI6tAHaHa&pid=Api&P=0&w=300&h=300',
         description: 'Descripción Zapatilla',
@@ -57,6 +65,7 @@ export const items = [
     },
     {
         id: Math.random(),
+        category: 'Pantalones',
         name: 'Pantalón',
         img: 'https://tse1.mm.bing.net/th?id=OIP.sSMFxh__RSpSoFIHraTAtQHaHa&pid=Api&P=0&w=300&h=300',
         description: 'Descripción Pantalón',
@@ -64,6 +73,7 @@ export const items = [
     },
     {
         id: Math.random(),
+        category: 'Remeras',
         name: 'Remera',
         img: 'https://tse1.mm.bing.net/th?id=OIP.7BlM7tXxR7Sbl2V_7Z05_QHaHa&pid=Api&P=0&w=300&h=300',
         description: 'Descripción Remera',
@@ -71,6 +81,7 @@ export const items = [
     },
     {
         id: Math.random(),
+        category: 'Zapatillas',
         name: 'Zapatilla',
         img: 'https://tse1.mm.bing.net/th?id=OIP.CKWtV1UnAJO5COmEXTI6tAHaHa&pid=Api&P=0&w=300&h=300',
         description: 'Descripción Zapatilla',
@@ -78,6 +89,7 @@ export const items = [
     },
     {
         id: Math.random(),
+        category: 'Pantalones',
         name: 'Pantalón',
         img: 'https://tse1.mm.bing.net/th?id=OIP.sSMFxh__RSpSoFIHraTAtQHaHa&pid=Api&P=0&w=300&h=300',
         description: 'Descripción Pantalón',
@@ -85,6 +97,7 @@ export const items = [
     },
     {
         id: Math.random(),
+        category: 'Remeras',
         name: 'Remera',
         img: 'https://tse1.mm.bing.net/th?id=OIP.7BlM7tXxR7Sbl2V_7Z05_QHaHa&pid=Api&P=0&w=300&h=300',
         description: 'Descripción Remera',
@@ -92,6 +105,7 @@ export const items = [
     },
     {
         id: Math.random(),
+        category: 'Zapatillas',
         name: 'Zapatilla',
         img: 'https://tse1.mm.bing.net/th?id=OIP.CKWtV1UnAJO5COmEXTI6tAHaHa&pid=Api&P=0&w=300&h=300',
         description: 'Descripción Zapatilla',
@@ -99,6 +113,7 @@ export const items = [
     },
     {
         id: Math.random(),
+        category: 'Pantalones',
         name: 'Pantalón',
         img: 'https://tse1.mm.bing.net/th?id=OIP.sSMFxh__RSpSoFIHraTAtQHaHa&pid=Api&P=0&w=300&h=300',
         description: 'Descripción Pantalón',
@@ -106,6 +121,7 @@ export const items = [
     },
     {
         id: Math.random(),
+        category: 'Remeras',
         name: 'Remera',
         img: 'https://tse1.mm.bing.net/th?id=OIP.7BlM7tXxR7Sbl2V_7Z05_QHaHa&pid=Api&P=0&w=300&h=300',
         description: 'Descripción Remera',
@@ -113,6 +129,7 @@ export const items = [
     },
     {
         id: Math.random(),
+        category: 'Zapatillas',
         name: 'Zapatilla',
         img: 'https://tse1.mm.bing.net/th?id=OIP.CKWtV1UnAJO5COmEXTI6tAHaHa&pid=Api&P=0&w=300&h=300',
         description: 'Descripción Zapatilla',
@@ -120,9 +137,34 @@ export const items = [
     },
     {
         id: Math.random(),
+        category: 'Pantalones',
         name: 'Pantalón',
         img: 'https://tse1.mm.bing.net/th?id=OIP.sSMFxh__RSpSoFIHraTAtQHaHa&pid=Api&P=0&w=300&h=300',
         description: 'Descripción Pantalón',
         price: 6000,
-    },        
+    },
+    {
+        id: Math.random(),
+        category: 'Remeras',
+        name: 'Remera',
+        img: 'https://tse1.mm.bing.net/th?id=OIP.7BlM7tXxR7Sbl2V_7Z05_QHaHa&pid=Api&P=0&w=300&h=300',
+        description: 'Descripción Remera',
+        price: 4200,
+    },
+    {
+        id: Math.random(),
+        category: 'Zapatillas',
+        name: 'Zapatilla',
+        img: 'https://tse1.mm.bing.net/th?id=OIP.CKWtV1UnAJO5COmEXTI6tAHaHa&pid=Api&P=0&w=300&h=300',
+        description: 'Descripción Zapatilla',
+        price: 12500,            
+    },
+    {
+        id: Math.random(),
+        category: 'Pantalones',
+        name: 'Pantalón',
+        img: 'https://tse1.mm.bing.net/th?id=OIP.sSMFxh__RSpSoFIHraTAtQHaHa&pid=Api&P=0&w=300&h=300',
+        description: 'Descripción Pantalón',
+        price: 6000,
+    },       
 ];

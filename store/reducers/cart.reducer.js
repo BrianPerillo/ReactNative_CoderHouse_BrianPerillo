@@ -20,10 +20,12 @@ const CartReducer = (state = INITIAL_STATE, action) => {
     
       return{
         ...state,
-        items: action.items.filter((item)=>item.id>0)
+        items: action.items,
       }
 
     case ADD_ITEM:
+      console.log("REDUCER ADD_ITEM");
+      console.log(action.item.id);
       const itemExist = state.items.findIndex(item => item.id === action.item.id);
 
       if (itemExist === -1) { //Sería que no existe, entonces: 
