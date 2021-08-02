@@ -7,11 +7,26 @@ import { StyleSheet } from 'react-native';
 import { Text } from 'react-native-elements';
 import { View } from 'react-native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import { get_cart_first_time } from '../store/actions/cart.action';
+import { useDispatch } from 'react-redux';
+import { useEffect } from 'react';
+import { useSelector } from 'react-redux';
 
 const TabStack = createBottomTabNavigator();
 
 const Tab = () => {
     
+    const dispatch = useDispatch();
+    const userId = useSelector(state => state.auth.user) || {}; 
+
+    useEffect(() => {
+
+        dispatch(get_cart_first_time(userId))
+
+    }, [])
+    
+    
+
     return(
         
         <TabStack.Navigator 

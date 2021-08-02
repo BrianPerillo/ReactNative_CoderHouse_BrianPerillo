@@ -1,4 +1,4 @@
-import { ADD_ITEM, CONFIRM_CART, DELETE_ITEM } from "../actions/cart.action";
+import { ADD_ITEM, CONFIRM_CART, DELETE_ITEM, GET_CART } from "../actions/cart.action";
 
 import { ActionSheetIOS } from "react-native";
 
@@ -13,6 +13,15 @@ const sumTotal = (list) => list.map(item => item.quantity * item.price)
 
 const CartReducer = (state = INITIAL_STATE, action) => {
   switch(action.type) {
+
+    case GET_CART:
+    console.log("wwww"); console.log("wwww");
+    console.log(action.items);
+    
+      return{
+        ...state,
+        items: action.items.filter((item)=>item.id>0)
+      }
 
     case ADD_ITEM:
       const itemExist = state.items.findIndex(item => item.id === action.item.id);

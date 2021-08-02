@@ -3,7 +3,7 @@ import { URL_API } from '../../constants/database';
 export const ADD_ITEM = 'ADD_ITEM';
 export const DELETE_ITEM = 'DELETE_ITEM';
 export const CONFIRM_CART = 'CONFIRM_CART';
-
+export const GET_CART = 'GET_CART';
 
 export const addItem = (item, items, userId) => {
 
@@ -97,6 +97,42 @@ export const confirmCart = (payload) => {
 
 
 // Funciones - Funciones - Funciones - Funciones - Funciones - Funciones - Funciones - Funciones - Funciones - Funciones        
+
+    
+export const get_cart_first_time = (userId) => {
+
+ 
+
+  return async dispatch => {
+
+    const response = await fetch(`${URL_API}/cart.json`, {
+      
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+      }
+
+    })
+
+    const result = await response.json();
+
+    const carts = [];
+
+    Object.keys(result).forEach(key=>carts.push({id:key, ...result[key]})) //Pusheo los carritos en carts, esto se hace así para poder extraer la key,
+    //del cart, es decir el id del carrito que genera automáticamente fireBase. Lo guardamos en " id: " se puede ver en el "console.log(cart)"
+    const cart = carts.filter(cart=>cart.userId === userId)//Filtro el carrito del usuario en cuestión
+    console.log("cart");console.log(cart);
+    //Si el usuario tiene carrito, lo edito:
+
+    dispatch({
+      type: GET_CART,
+      items: cart[0].items,
+    })
+
+
+  }
+ 
+}
 
 
 const get_cart = async () => {

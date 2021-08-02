@@ -6,13 +6,16 @@ import { deleteItem } from '../store/actions/cart.action';
 import { findCurrentItem } from '../store/actions/findCurrentItem';
 
 const Cart = ({navigation}) => {
-
+  
     const dispatch = useDispatch();
 
-    const items = useSelector(state => state.cart.items) || {}
-    const total_price = useSelector(state => state.cart.total) || {}
-    const userId = useSelector(state => state.auth.user) || {}; 
-    
+    const items = useSelector(state => state.cart.items) || null
+    const total_price = useSelector(state => state.cart.total) || null
+    const userId = useSelector(state => state.auth.user) || null; 
+
+    console.log("wwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwww");
+    console.log(items);
+
     const handleOnPressDelete = (itemId) => {
         console.log(itemId); 
         dispatch(deleteItem(itemId,items,userId))
