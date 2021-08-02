@@ -7,68 +7,149 @@ export const CONFIRM_CART = 'CONFIRM_CART';
 
 export const addItem = (item, items, userId) => {
 
-  // Traigo carrito:
 
     return async dispatch => {
-      
-    const response = await fetch(`${URL_API}/cart.json`, {
-      method: 'GET',
-      headers: {
-        'Content-Type': 'application/json',
-      }
 
-    })
+    // Traigo carrito:
 
-    const result = await response.json(); //Acá guardo el resultado, lo que devuelve firebase. .json para convertir de json objeto de JS
-    console.log(result)
+      const response = await get_cart(); //Acá guardo el resultado, lo que devuelve firebase. .json para convertir de json objeto de JS
+      const result = await response.json();
 
-    //Si trajo carritos, es decir result !== null, filtro el que corresponda al usuario en cuestión. 
-    if(result == null){
-      console.log("no hay carrito... creando carrito...");
-      //Hay que crearlo haciendo un POST
-      
-        try {
-          const response = await fetch(`${URL_API}/cart.json`, {
-            method: 'POST',
-            headers: {
-              'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({
-              date: Date.now(),
-              items: items.concat(item),
-              userId: userId
-            })
-          })
+      console.log(result)
 
-          console.log(response)
+    //Si no trajo carritos, es decir result == null, lo creamos
+    
+      if(result == null){
+        console.log("no hay carrito... creando carrito...");
+        //Hay que crearlo haciendo un POST
+        
+        await create_cart(item, userId);
 
-          console.log("carrito creado");
-
-          dispatch({
-            type: ADD_ITEM,
-            item: item,
-          });
-        } catch {
-
-          console.log(error.message);
-          
-        }
-      
+        dispatch({
+          type: ADD_ITEM,
+          item: item,
+        });
+    
+    //Si trajo carritos chequeamos si alguno de los que hay pertenece al usuario en cuestión, de ser así se editará, sino se creará lo edito: 
     }
     else{
       console.log("Hay carrito... Actualizando carrito...");
 
-      const carts = [];
+      await edit_or_create_cart(result, items, item, userId);
+      
+      dispatch({
+        type: ADD_ITEM,
+        item: item,
+      });
+    }
 
-      Object.keys(result).forEach(key=>carts.push({id:key, ...result[key]})) //Pusheo los carritos en carts, esto se hace así para poder extraer la key,
-      //del cart, es decir el id del carrito que genera automáticamente fireBase. Lo guardamos en " id: " se puede ver en el "console.log(cart)"
-      const cart = carts.filter(cart=>cart.userId === userId)//Filtro el carrito del usuario en cuestión
-      console.log(cart[0].id);
-      // console.log("carts")
-      // console.log(cart)
-      // console.log("result")
-      // console.log(result)
+  }
 
+};
+
+export const deleteItem = (itemID, items, userId) => {
+
+  return async dispatch => {
+    //Traigo carritos
+    
+    const response = await get_cart(); //Acá guardo el resultado, lo que devuelve firebase. .json para convertir de json objeto de JS
+    const result = await response.json();
+    
+
+    console.log("Hay carrito... Eliminando item...");
+
+    //Elimino en Firebase
+    await delete_item(result, itemID, items, userId);
+
+    dispatch({
+      type: DELETE_ITEM,
+      itemID: itemID,
+    });
+
+  };
+
+};
+
+export const confirmCart = (payload) => {
+  return async dispatch => {
+    try {
+      const response = await fetch(`${URL_API}/orders.json`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          date: Date.now(),
+          items: { ...payload },
+        })
+      })
+      console.log(response)
+      dispatch({
+        type: CONFIRM_CART,
+        confirm: true,
+      });
+    } catch {
+      console.log(error.message);
+    }
+  }
+}
+
+
+
+// Funciones - Funciones - Funciones - Funciones - Funciones - Funciones - Funciones - Funciones - Funciones - Funciones        
+
+
+const get_cart = async () => {
+
+  const response = await fetch(`${URL_API}/cart.json`, {
+   method: 'GET',
+   headers: {
+     'Content-Type': 'application/json',
+   }
+
+ })
+
+ return response;
+
+}
+
+const create_cart = async (item, userId) => {
+
+ try {
+   const response = await fetch(`${URL_API}/cart.json`, {
+     method: 'POST',
+     headers: {
+       'Content-Type': 'application/json',
+     },
+     body: JSON.stringify({
+       date: Date.now(),
+       items: item,
+       userId: userId
+     })
+   })
+
+   console.log(response)
+
+   console.log("carrito creado");
+
+ } catch {
+
+   console.log(error.message);
+   
+ }
+
+}
+
+const edit_or_create_cart = async (result, items, item, userId)  => {
+
+   const carts = [];
+
+   Object.keys(result).forEach(key=>carts.push({id:key, ...result[key]})) //Pusheo los carritos en carts, esto se hace así para poder extraer la key,
+   //del cart, es decir el id del carrito que genera automáticamente fireBase. Lo guardamos en " id: " se puede ver en el "console.log(cart)"
+   const cart = carts.filter(cart=>cart.userId === userId)//Filtro el carrito del usuario en cuestión
+   console.log("cart");console.log(cart);
+   //Si el usuario tiene carrito, lo edito:
+   if(cart.length > 0){
       //Hacer PUT
       try {
         const response = await fetch(`${URL_API}/cart/${cart[0].id}.json`, {
@@ -87,41 +168,23 @@ export const addItem = (item, items, userId) => {
 
         console.log("Carrito Actualizado");
 
-        dispatch({
-          type: ADD_ITEM,
-          item: item,
-        });
-      } catch {
+      } catch(error) {
 
         console.log(error.message);
         
       }
+   }
+   //Sino, lo creo:
+   else{
 
-    }
+    create_cart(item,userId)
 
+   }
+  
+ 
+}
 
-
-  }
-
-};
-
-export const deleteItem = (itemID, items, userId) => {
-
-  return async dispatch => {
-
-    //Traigo carritos
-    const response = await fetch(`${URL_API}/cart.json`, {
-      method: 'GET',
-      headers: {
-        'Content-Type': 'application/json',
-      }
-
-    })
-    
-    //Guardo el resultado de la consulta GET: 
-    const result = await response.json(); 
-
-    console.log("Hay carrito... Eliminando item...");
+const delete_item = async (result, itemID, items, userId) => {
 
     //Creo constante para guardar los resultados con la key de cada uno (el id autogenerado por FireBase)
     const carts = [];
@@ -155,11 +218,6 @@ export const deleteItem = (itemID, items, userId) => {
       console.log(response)
 
       console.log("Carrito Actualizado");
-
-      dispatch({
-        type: DELETE_ITEM,
-        itemID: itemID,
-      });
       
     } catch {
 
@@ -167,30 +225,4 @@ export const deleteItem = (itemID, items, userId) => {
       
     }
 
-  };
-
-};
-
-export const confirmCart = (payload) => {
-  return async dispatch => {
-    try {
-      const response = await fetch(`${URL_API}/orders.json`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          date: Date.now(),
-          items: { ...payload },
-        })
-      })
-      console.log(response)
-      dispatch({
-        type: CONFIRM_CART,
-        confirm: true,
-      });
-    } catch {
-      console.log(error.message);
-    }
-  }
 }
