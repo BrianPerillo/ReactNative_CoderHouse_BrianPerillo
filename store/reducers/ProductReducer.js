@@ -5,6 +5,7 @@ import { items } from '../../data/products';
 const INITIAL_STATE = {
     products: items,
     filtered_products: null,
+    category: null,
     selected: null,
 }
 
@@ -14,15 +15,29 @@ const ProductReducer = (state = INITIAL_STATE, action) => {
 
         case FILTERED_PRODUCTS_BY_NAME: //Si es de tipo CURRENT_PRODUCT (Seleccionaron un producto en concreto):
 
-            const filtered_list = items.filter((item) => item.name.match(action.productName));//Filtro el producto como si fuera con %LIKE%
-            console.log(filtered_list);
-            //items.filter( (item) => item.name==action.productName); //Filtro el producto "SIn %LIKE%"
-            // console.log(filtered_list);
-
-            return {
-                ...state,
-                filtered_products: filtered_list,
+            //Si se encuentra en una categoría tiene en cuenta la categoría para filtrar
+            
+            if(state.category !== null){
+                const filtered_list = items.filter((item) => item.name.match(action.productName) && item.category == state.category);//Filtro el producto como si fuera con %LIKE%
+                console.log(filtered_list);
+    
+                return {
+                    ...state,
+                    filtered_products: filtered_list,
+                }
             }
+            else{
+                const filtered_list = items.filter((item) => item.name.match(action.productName));//Filtro el producto como si fuera con %LIKE%
+                console.log(filtered_list);
+                //items.filter( (item) => item.name==action.productName); //Filtro el producto "SIn %LIKE%"
+                // console.log(filtered_list);
+    
+                return {
+                    ...state,
+                    filtered_products: filtered_list,
+                }
+            }
+
 
         case CURRENT_PRODUCT: //Si es de tipo CURRENT_PRODUCT (Seleccionaron un producto en concreto):
 
@@ -45,6 +60,7 @@ const ProductReducer = (state = INITIAL_STATE, action) => {
             return {
                 ...state,
                 filtered_products: filtered_list_by_category,
+                category: action.categoryName,
             }
 
         default: // Deafult sería en caso que el state sea INITIAL_STATE. Lo que retornamos en este caso es u nuevo estado pero sin cambios. 

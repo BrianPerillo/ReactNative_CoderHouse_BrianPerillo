@@ -26,7 +26,7 @@ const Cart = ({navigation}) => {
 
         console.log(product.id);
         dispatch(findCurrentItem(product.id));
-        navigation.navigate('Detalle Producto', { name: "Zapatilla"}); 
+        navigation.navigate('Detalle Producto', { name: product.name}); 
         
     } 
 

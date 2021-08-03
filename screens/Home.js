@@ -29,7 +29,7 @@ const Home = ({navigation}) => {
 
     // const handleOnChangeText = (text) => {     
     //     setSearch(text);
-    //     dispatch(findItemsByName(text));
+    //     dispatch(findCategory(text));
     // }
 
 
@@ -37,14 +37,14 @@ const Home = ({navigation}) => {
 
         <View style={styles.screen}>
 
-                      
+{/*                       
           <SearchBar
             placeholder="Buscá un producto..."
-            // onChangeText={text => handleOnChangeText(text)}
+            onChangeText={text => handleOnChangeText(text)}
             value={search}
             // lightTheme='default'
             showLoading
-            />
+            /> */}
 
           <FlatList
             data={categories} 

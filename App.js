@@ -11,10 +11,6 @@ import { useFonts } from 'expo-font';
 
 export default function App() {
 
-  const [title, setTitle] = useState('Titulo');
-  const [confirmedNumber, setConfirmedNumber] = useState(null);  
-  const [guessNumber, setGuessNumber] = useState(null);
-  const [round, setRound] = useState(0)
   // const [dataLoaded] = useFonts({
   //   'open-sans': require('./assets/fonts/OpenSans-Regular.ttf'),
   //   'open-sans-bold': require('./assets/fonts/OpenSans-Bold.ttf'),

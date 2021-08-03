@@ -101,7 +101,7 @@ export const confirmCart = (payload) => {
     
 export const get_cart_first_time = (userId) => {
 
- 
+  //Busco si  el usuario logueado tiene un carrito para traeer sus items
 
   return async dispatch => {
 
@@ -118,17 +118,21 @@ export const get_cart_first_time = (userId) => {
 
     const carts = [];
 
-    Object.keys(result).forEach(key=>carts.push({id:key, ...result[key]})) //Pusheo los carritos en carts, esto se hace así para poder extraer la key,
-    //del cart, es decir el id del carrito que genera automáticamente fireBase. Lo guardamos en " id: " se puede ver en el "console.log(cart)"
-    const cart = carts.filter(cart=>cart.userId === userId)//Filtro el carrito del usuario en cuestión
-    console.log("cart");console.log(cart);
-    //Si el usuario tiene carrito, lo edito:
+    //Si tiene un carrito, es decir el result no volvió vació, entonces lo guardo, sino no hago nada:
+    if(result !== null){ 
 
-    dispatch({
-      type: GET_CART,
-      items: cart[0].items,
-    })
+      Object.keys(result).forEach(key=>carts.push({id:key, ...result[key]})) //Pusheo los carritos en carts, esto se hace así para poder extraer la key,
+      //del cart, es decir el id del carrito que genera automáticamente fireBase. Lo guardamos en " id: " se puede ver en el "console.log(cart)"
+      const cart = carts.filter(cart=>cart.userId === userId)//Filtro el carrito del usuario en cuestión
+      console.log("cart");console.log(cart);
+      //Si el usuario tiene carrito, lo edito:
+  
+      dispatch({
+        type: GET_CART,
+        items: cart[0].items,
+      })
 
+    }
 
   }
  

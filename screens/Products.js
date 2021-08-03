@@ -8,8 +8,7 @@ import Icon from "react-native-vector-icons/Ionicons";
 import { Ionicons } from '@expo/vector-icons';
 import { SearchBar } from 'react-native-elements';
 import { findCurrentItem } from '../store/actions/ProductsAction';
-import { findItemsByName } from '../store/actions/findItemsByName';
-import { items } from '../data/products';
+import { findItemsByName } from '../store/actions/ProductsAction';
 import { useDispatch } from 'react-redux';
 import { useSelector } from 'react-redux';
 
