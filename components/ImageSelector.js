@@ -1,7 +1,8 @@
-import React, { useState } from 'react';
-import { View, Button, Image, Text, StyleSheet, Alert } from 'react-native';
 import * as ImagePicker from 'expo-image-picker';
 import * as Permissions from 'expo-permissions';
+
+import { Alert, Button, Image, StyleSheet, Text, View } from 'react-native';
+import React, { useState } from 'react';
 
 import { COLORS } from '../constants';
 
@@ -22,17 +23,24 @@ const ImageSelector = props => {
     return true;
   }
 
+  //Tomar Foto
   const handlerTakeImage = async () => {
+
+    //Pido permiso para tomar usar la cámara
     const isCameraOk = await verifyPermissions();
     if (!isCameraOk) return;
 
+    //Si dió los permisos ejecutamos el método launchCameraAsync de ImagePicker, todo se guarda en const image
     const image = await ImagePicker.launchCameraAsync({
       allowsEditing: true,
       aspect: [16,9],
       quality: 0.8,
     });
 
+    //seteamos la uri de la imagen, actualizando el estado para ejecutar un re-render y cargar la imagen tomada en la vista (!pickedUri ?): 
     setPickedUri(image.uri);
+
+    //setemos la uri de la imagen también en el componente padre, ya que la necesita para cuando presionen el button guardar dirección y ejecutar el dispatch.
     props.onImage(image.uri);
   };
 

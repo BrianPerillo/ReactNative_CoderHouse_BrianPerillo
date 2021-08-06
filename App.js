@@ -1,8 +1,11 @@
-import React from 'react';
+import MainNavigator from './navigation'
 import { Provider } from 'react-redux'
-
-import store from './store'
+import React from 'react';
+import {delte_table} from './db';
 import { init } from './db';
+import store from './store'
+
+// delte_table();
 
 init()
   .then(() => console.log('Database initialized'))
@@ -11,8 +14,6 @@ init()
     console.log(err.message)
   });
 
-// navigation
-import MainNavigator from './navigation'
 
 export default function App() {
   return (<Provider store={store}><MainNavigator /></Provider>);

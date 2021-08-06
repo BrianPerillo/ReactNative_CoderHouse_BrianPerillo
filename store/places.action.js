@@ -1,11 +1,14 @@
 import * as FileSystem from 'expo-file-system';
-import { insertAddress, fetchAddress } from '../db';
+
+import { fetchAddress, insertAddress } from '../db';
 
 export const ADD_PLACE = 'ADD_PLACE';
 export const LOAD_PLACES = 'LOAD_PLACES';
 
-export const addPlace = (title, image) => {
+export const addPlace = (title, description, location, image) => {
+
     return async dispatch => {
+        
         const fileName = image.split('/').pop()
         const Path = FileSystem.documentDirectory + fileName;
 
@@ -15,9 +18,12 @@ export const addPlace = (title, image) => {
                 to: Path,
             });
 
+            //Guardo en SQLite
             const result = await insertAddress(
                 title,
+                description,
                 Path,
+                location,
                 'Address',
                 13.5,
                 10.5,
@@ -25,15 +31,17 @@ export const addPlace = (title, image) => {
 
             console.log(result)
 
+            //Guardo en Estado
             dispatch({
                 type: ADD_PLACE,
-                payload: { id: result.insertId, title, image: Path },
+                payload: { id: result.insertId, title, description, image: Path, location },
             });
         } catch (err) {
             console.log(err.mesage);
             throw err;
         }
     }
+    
 }
 
 export const loadPlaces = () => {

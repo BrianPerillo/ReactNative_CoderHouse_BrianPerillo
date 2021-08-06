@@ -2,6 +2,23 @@ import * as SQLite from 'expo-sqlite';
 
 const db = SQLite.openDatabase('address.db');
 
+export const delte_table = () => {
+
+  const promise = new Promise((resolve, reject) => {
+    db.transaction(tx => {
+      tx.executeSql(
+        `DROP TABLE address`,
+        [],
+        () => { resolve() },
+        (_, err) => { reject(err) },
+      )
+    });
+  });
+
+  return promise;
+
+}
+
 export const init = () => {
   const promise = new Promise((resolve, reject) => {
     db.transaction(tx => {
@@ -9,6 +26,8 @@ export const init = () => {
         `CREATE TABLE IF NOT EXISTS address (
           id INTEGER PRIMARY KEY NOT NULL,
           title TEXT NOT NULL,
+          description TEXT NOT NULL,
+          location TEXT NOT NULL,
           image TEXT NOT NULL,
           address TEXT NOT NULL,
           lat REAL NOT NULL,
@@ -26,6 +45,8 @@ export const init = () => {
 
 export const insertAddress = (
   title,
+  description,
+  location,
   image,
   address,
   lat,
@@ -34,8 +55,8 @@ export const insertAddress = (
   const promise = new Promise((resolve, reject) => {
     db.transaction(tx => {
       tx.executeSql(
-        `INSERT INTO address (title, image, address, lat, lng) VALUES (?, ?, ?, ?, ?)`,
-        [title, image, address, lat, lng],
+        `INSERT INTO address (title, description, location, image, address, lat, lng) VALUES (?, ?, ?, ?, ?, ?, ?)`,
+        [title, description, location, image, address, lat, lng],
         (_, result) => resolve(result),
         (_, err) => reject(err),
       );
