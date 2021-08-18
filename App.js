@@ -5,7 +5,7 @@ import {delte_table} from './db';
 import { init } from './db';
 import store from './store'
 
-// delte_table();
+// delte_table(); a
 
 init()
   .then(() => console.log('Database initialized'))
