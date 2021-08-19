@@ -6,7 +6,7 @@ export const ADD_PLACE = 'ADD_PLACE';
 export const LOAD_PLACES = 'LOAD_PLACES';
 
 export const addPlace = (title, description, location, image) => {
-
+    console.log("s2");
     return async dispatch => {
         
         const fileName = image.split('/').pop()

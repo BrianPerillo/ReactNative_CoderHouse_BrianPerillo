@@ -1,17 +1,19 @@
 import { Button, ScrollView, StyleSheet, Text, TextInput, View } from 'react-native'
-import React, { useState } from 'react'
+import React, { useCallback, useState } from 'react'
 
 import { COLORS } from '../constants'
 import GetLocation from '../components/GetLocation';
 import ImageSelector from '../components/ImageSelector';
+import LocationPicker from '../components/LocationPicker';
 import { addPlace } from '../store/places.action';
+import { keys } from '../constants/Map';
 import { useDispatch } from 'react-redux';
 
-const NewPlaceScreen = ({ navigation }) => {
+const NewPlaceScreen = ({ navigation, route }) => {
     const dispatch = useDispatch();
     const [title, setTitle] = useState('');
     const [description, setDescription] = useState('');
-    const [location, setLocation] = useState('');
+    const [selectedLocation, setSelectedLocation] = useState();
     const [selectedImage, setSelectedImage] = useState('');
 
     const onHandlerTitle = (text) => {
@@ -22,9 +24,9 @@ const NewPlaceScreen = ({ navigation }) => {
         setDescription(text);
     }
 
-    const onHandlerLocation = (text) => {
-        setLocation(text);
-    }
+    const onHandlerLocationPicked = useCallback(location => {
+        setSelectedLocation(location);
+    }, [setSelectedLocation]);
     
     const onHandlerImage = (path) => {
         setSelectedImage(path);
@@ -32,7 +34,20 @@ const NewPlaceScreen = ({ navigation }) => {
 
     //Ejecuto dispatch addPlace para guardar la dirección, (Foto y título), luego redirijo (navigation.goBack()) a la pantalla de listado de direcciones
     const onHandlerSave = () => {
-        dispatch(addPlace(title, description, location, selectedImage)); //location es la uri que hay que pasarle a un Comp Image para ver la imagen del mapa
+        // console.log("selectedLocation");
+        // console.log(selectedLocation.lat + ' ' + selectedLocation.lng);
+        // console.log("selectedLocation");
+        // return
+        const selectedLocationUri =
+            `https://maps.googleapis.com/maps/api/staticmap?
+            center=${selectedLocation.lat},${selectedLocation.lng}
+            &zoom=13
+            &size=600x300
+            &maptype=roadmap
+            &markers=color:blue%7Clabel:S%7C${selectedLocation.lat},${selectedLocation.lng}
+            &key=${keys.API_MAPS_KEY}`
+        
+        dispatch(addPlace(title, description, selectedLocationUri, selectedImage)); //location es la uri que hay que pasarle a un Comp Image para ver la imagen del mapa
         navigation.goBack();
     }
 
@@ -52,8 +67,14 @@ const NewPlaceScreen = ({ navigation }) => {
 
                 {/* Ubicación */}
 
-                <GetLocation onLocation={onHandlerLocation}/>
+                {/* <GetLocation onLocation={onHandlerLocation}/> */}
                 
+                <LocationPicker
+                    navigation={navigation}
+                    route={route}
+                    onLocationPicked={onHandlerLocationPicked}
+                />
+
                 {/* Descripción */}
                 <View style={styles.descriptionArea}>
                     <Text style={styles.label}>Descripción</Text>

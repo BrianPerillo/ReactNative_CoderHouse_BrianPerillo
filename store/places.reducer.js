@@ -9,6 +9,7 @@ const initialState = {
 export default (state = initialState, action) => {
     switch(action.type) {
         case ADD_PLACE:
+            console.log("s3");
             console.log(action.payload);
             const newPlace = new Place(
                 action.payload.id.toString(),
