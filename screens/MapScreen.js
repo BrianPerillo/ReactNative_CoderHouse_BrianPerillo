@@ -10,10 +10,10 @@ const MapScreen = ({navigation}) => {
     const [selectedLocation, setSelectedLocation] = useState();
 
     const region = {
-        latitude: 37.78,
-        longitude: -122.43,
-        latitudeDelta: 0.0922,
-        longitudeDelta: 0.0421,
+        latitude: -34.59,
+        longitude: -58.45,
+        latitudeDelta: 0.30,
+        longitudeDelta: 0.30,
     }
  
     const savePickedLocationHandler = useCallback(() => {
@@ -48,7 +48,7 @@ const MapScreen = ({navigation}) => {
                 <HeaderButtons HeaderButtonComponent={HeaderButton}>
                     <Item
                         title="Guardar"
-                        iconName="save-outline"
+                        // iconName="save-outline"
                         onPress={savePickedLocationHandler}
                     />
                 </HeaderButtons>

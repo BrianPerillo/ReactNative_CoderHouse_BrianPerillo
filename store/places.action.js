@@ -5,7 +5,7 @@ import { fetchAddress, insertAddress } from '../db';
 export const ADD_PLACE = 'ADD_PLACE';
 export const LOAD_PLACES = 'LOAD_PLACES';
 
-export const addPlace = (title, description, location, image) => {
+export const addPlace = (title, description, location, image, lat, lng) => {
     console.log("s2");
     return async dispatch => {
         
@@ -25,8 +25,8 @@ export const addPlace = (title, description, location, image) => {
                 Path,
                 location,
                 'Address',
-                13.5,
-                10.5,
+                lat,
+                lng,
             );
 
             console.log(result)
@@ -34,7 +34,7 @@ export const addPlace = (title, description, location, image) => {
             //Guardo en Estado
             dispatch({
                 type: ADD_PLACE,
-                payload: { id: result.insertId, title, description, image: Path, location },
+                payload: { id: result.insertId, title, description, image: Path, location, lat, lng },
             });
         } catch (err) {
             console.log(err.mesage);
@@ -48,6 +48,7 @@ export const loadPlaces = () => {
     return async dispatch => {
         try {
             const result = await fetchAddress();
+            console.log("result DB");
             console.log(result);
             dispatch({ type: LOAD_PLACES, places: result.rows._array });
         } catch (error) {

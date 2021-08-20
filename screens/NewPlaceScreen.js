@@ -38,6 +38,8 @@ const NewPlaceScreen = ({ navigation, route }) => {
         // console.log(selectedLocation.lat + ' ' + selectedLocation.lng);
         // console.log("selectedLocation");
         // return
+        const lat = selectedLocation.lat;
+        const lng = selectedLocation.lng;
         const selectedLocationUri =
             `https://maps.googleapis.com/maps/api/staticmap?
             center=${selectedLocation.lat},${selectedLocation.lng}
@@ -47,7 +49,7 @@ const NewPlaceScreen = ({ navigation, route }) => {
             &markers=color:blue%7Clabel:S%7C${selectedLocation.lat},${selectedLocation.lng}
             &key=${keys.API_MAPS_KEY}`
         
-        dispatch(addPlace(title, description, selectedLocationUri, selectedImage)); //location es la uri que hay que pasarle a un Comp Image para ver la imagen del mapa
+        dispatch(addPlace(title, description, selectedLocationUri, selectedImage, lat, lng)); //location es la uri que hay que pasarle a un Comp Image para ver la imagen del mapa
         navigation.goBack();
     }
 

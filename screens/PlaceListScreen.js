@@ -11,7 +11,8 @@ import { loadPlaces } from '../store/places.action';
 const PlaceListScreen = ({ navigation }) => {
     const dispatch = useDispatch();
     const places = useSelector(state => state.places.places);
-
+    console.log("placesListScreen");
+    console.log(places);
     //Botón en el encabezado para redirigir a la pantalla para agregar direcciones
     useLayoutEffect(() => {
         navigation.setOptions({
@@ -30,14 +31,17 @@ const PlaceListScreen = ({ navigation }) => {
     useEffect(() => {
         dispatch(loadPlaces());
     }, []);
+
     console.log("renderItem");
     console.log();
+    
     const renderItem = data => (
         <PlaceItem
             image={data.item.image}
             address={null}
             title={data.item.title}
-            onSelect={() => navigation.push('Detalle', {title:data.item.title, image: data.item.image, description:data.item.description, location: data.item.location} )}
+            onSelect={() => navigation.push('Detalle', {title:data.item.title, image: data.item.image, description:data.item.description, location: data.item.location, 
+                lat: data.item.lat, lng: data.item.lng} )}
         />
     )
 

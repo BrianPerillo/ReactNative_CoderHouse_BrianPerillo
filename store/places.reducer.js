@@ -17,6 +17,8 @@ export default (state = initialState, action) => {
                 action.payload.description,
                 action.payload.image,
                 action.payload.location,
+                action.payload.lat,
+                action.payload.lng,
             )
             return {
                 ...state,
@@ -31,6 +33,8 @@ export default (state = initialState, action) => {
                     item.description,
                     item.image,
                     item.location,
+                    item.lat,
+                    item.lng,
                 )),
             }
         default:

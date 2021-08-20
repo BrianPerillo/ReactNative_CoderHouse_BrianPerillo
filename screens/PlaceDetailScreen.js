@@ -1,12 +1,27 @@
 import { Image, StyleSheet, Text, View } from 'react-native'
+import MapView, { Marker } from 'react-native-maps';
+import React, {useState} from 'react'
 
 import { COLORS } from '../constants';
-import React from 'react'
 
 const PlaceDetailScreen = (props) => {
+
     console.log("wwwwwwwww");
-    console.log(props);
-  
+    console.log(props.route.params);
+    ;
+
+    const region = {
+        latitude: props.route.params.lat,
+        longitude: props.route.params.lng,
+        latitudeDelta: 0.0025,
+        longitudeDelta: 0.0025,
+    }
+
+    const markerCoordinates = {
+        latitude:  props.route.params.lat,
+        longitude:  props.route.params.lng,
+    };
+    
     return (
         <View style={styles.container}>
             
@@ -17,13 +32,26 @@ const PlaceDetailScreen = (props) => {
             <Text style={styles.description}>{props.route.params.description}</Text>
 
             <Text style={styles.label}>Ubicación</Text>
-            <Image style={styles.mapImage} source={{ uri: props.route.params.location}} />
+            {/* <Image style={styles.mapImage} source={{ uri: props.route.params.location}} /> */}
+            <MapView
+                initialRegion={region}
+                style={styles.map}
+            >
+
+        
+                <Marker title="Selección" coordinate={markerCoordinates} />
+           
+
+            </MapView>
 
         </View>
     )
 }
 
 const styles = StyleSheet.create({
+    map: {
+        flex: 0.9
+    },
     container: {
         flex: 1,
         paddingBottom:15,
