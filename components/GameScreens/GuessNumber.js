@@ -14,9 +14,9 @@ const generateRandomBetween = (min, max) => {
   }
   
   var min=1;
-  var max=50;
+  var max=51;
 
-const GuessNumber = ({ number, setConfirmedNumber, setGuessNumber, setRound }) => {
+const GuessNumber = ({ number, setConfirmedNumber, setGuessNumber, setRound, round }) => {
 
     const [currentGuess, setCurrentGuess] = useState(generateRandomBetween(min, max));
 
@@ -30,7 +30,7 @@ const GuessNumber = ({ number, setConfirmedNumber, setGuessNumber, setRound }) =
           // console.log(currentGuess);
           setGuessNumber(currentGuess);
           setRound(prevState=>(prevState+1))
-          min = currentGuess;
+          min = currentGuess + 1;
           console.log('min: ' + min + ' max: ' + max);
           setCurrentGuess(generateRandomBetween(min, max));
         }
@@ -58,6 +58,15 @@ const GuessNumber = ({ number, setConfirmedNumber, setGuessNumber, setRound }) =
 
     }
 
+    const handleOnPressPlayAgain = () => {
+
+      setConfirmedNumber(0)
+      setRound(0)
+      min = 1
+      max = 51
+
+    }
+
     
     return (  
 
@@ -75,7 +84,11 @@ const GuessNumber = ({ number, setConfirmedNumber, setGuessNumber, setRound }) =
 
               {
                 currentGuess == number ? 
+                <View>
                   <Text>El oponente acertó el número</Text>
+                  <Text>Cantidad de rondas: {round}</Text>
+                  <Button style={styles.Button}  title="Jugar de Nuevo" onPress={() => handleOnPressPlayAgain()}/>
+                </View>
                 :
                 <Text></Text>
               }

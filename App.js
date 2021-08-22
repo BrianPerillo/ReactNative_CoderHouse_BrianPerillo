@@ -24,7 +24,7 @@ export default function App() {
       inicio = <StartGameScreen  setConfirmedNumber={setConfirmedNumber} />
     } 
     else{
-      inicio = <GuessNumber number={confirmedNumber} setConfirmedNumber={setConfirmedNumber} setGuessNumber={setGuessNumber} setRound={setRound}/>
+      inicio = <GuessNumber round={round} number={confirmedNumber} setConfirmedNumber={setConfirmedNumber} setGuessNumber={setGuessNumber} setRound={setRound}/>
     }
 
 
