@@ -3,9 +3,11 @@ import {  } from '../store/actions/ProductsAction';
 import * as React from 'react';
 
 import {Button, FlatList, Image, Pressable, StyleSheet, Text, TextInput, View} from 'react-native';
+import { backgroundColor, flex } from 'styled-system';
 import { findCurrentCategoryItems, findCurrentItem, findItemsByName } from '../store/actions/ProductsAction';
 import { useEffect, useState } from 'react';
 
+import Card from '../components/Card';
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
 import Icon from "react-native-vector-icons/Ionicons";
 import { Ionicons } from '@expo/vector-icons';
@@ -37,34 +39,60 @@ const Home = ({navigation}) => {
 
         <View style={styles.screen}>
 
-{/*                       
+                      
           <SearchBar
             placeholder="Buscá un producto..."
             onChangeText={text => handleOnChangeText(text)}
             value={search}
             // lightTheme='default'
             showLoading
-            /> */}
+            />
+            <View style={{marginBottom:30, alignItems:'center', backgroundColor:'#dcdcdc', padding:15}}>
+                <Text>Productos Destacados</Text>
+            
+                <FlatList 
+                    data={categories} 
+                    horizontal={true}
+                    renderItem={data => {
 
-          <FlatList
-            data={categories} 
-            renderItem={data => {
-            return (
-                // <Pressable onPress={()=>navigation.navigate('Producto', {item: data.item} )}>
-                <Pressable onPress={() => handleOnPress(data.item)}>
-                    <View style={styles.productCard}>
-                        <Image style={{height:80, width:80}} source={{uri: data.item.img}}/>
-                        <Text style={{fontSize:16}}>{data.item.name}</Text>
-                        {/* <Text style={{color:'orange',fontSize:16}}>${data.item.price}</Text> */}
-                        {/* <FontAwesomeIcon icon="arrow" /> */}
-                        <Ionicons name="arrow-forward-circle-sharp" size={24} color="orange"/> 
-                    </View>
-                </Pressable>
-            );
-          }}
-          keyExtractor={(item) => item.id.toString()}
-          />
+                    return (
+                        // <Pressable onPress={()=>navigation.navigate('Producto', {item: data.item} )}>
+                        <Pressable style={{margin:10}} onPress={() => handleOnPress(data.item)}>
+                                {/* <Image style={{height:80, width:80}} source={{uri: data.item.img}}/>
+                                <Text style={{fontSize:16}}>{data.item.name}</Text>
+                                <Ionicons name="arrow-forward-circle-sharp" size={24} color="orange"/>  */}
+                            <Card item={data.item} />
+                    
+                        </Pressable>
+                    );
+                }}
+                keyExtractor={(item) => item.id.toString()}
+                />
+            </View>
 
+            <View style={{marginVertical:15, alignItems:'center', padding:15}}>
+                <Text>Categorías</Text>
+            
+                    <FlatList 
+                        numColumns={3}
+                        data={categories} 
+                        renderItem={data => {
+
+                        return (
+                            // <Pressable onPress={()=>navigation.navigate('Producto', {item: data.item} )}>
+                            <Pressable style={{margin:10}} onPress={() => handleOnPress(data.item)}>
+                                    {/* <Image style={{height:80, width:80}} source={{uri: data.item.img}}/>
+                                    <Text style={{fontSize:16}}>{data.item.name}</Text>
+                                    <Ionicons name="arrow-forward-circle-sharp" size={24} color="orange"/>  */}
+                                <Card item={data.item} />
+                        
+                            </Pressable>
+                        );
+                    }}
+                    keyExtractor={(item) => item.id.toString()}
+                    />
+            </View>
+    
         </View>
 
      );

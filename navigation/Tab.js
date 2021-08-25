@@ -44,7 +44,9 @@ const Tab = () => {
                     // borderRadius:15,
                     height:90,
                     ...styles.shadow,
-            }
+            },
+            
+           
             
         }}>
             
