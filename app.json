@@ -1,12 +1,16 @@
 {
   "expo": {
-    "name": "BrianPerillo_CoderHouse_ReacNative",
-    "slug": "BrianPerillo_CoderHouse_ReacNative",
+    "name": "E-commerce",
+    "slug": "E-commerce",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/icon.png",
+    "platforms": [
+      "ios",
+      "android"
+    ],
+    "icon": "./assets/e_commerce_logo.png",
     "splash": {
-      "image": "./assets/splash.png",
+      "image": "./assets/e_commerce_logo.png",
       "resizeMode": "contain",
       "backgroundColor": "#ffffff"
     },
