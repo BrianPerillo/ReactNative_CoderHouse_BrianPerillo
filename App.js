@@ -6,6 +6,9 @@ import MainNavigator from './navigation';
 import { Provider } from 'react-redux';
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet } from 'react-native';
+import { fetchCart } from './db';
+import { init } from './db';
+import { insertProduct } from './db';
 import store from './store';
 import { useFonts } from 'expo-font';
 
@@ -15,7 +18,14 @@ export default function App() {
   //   'open-sans': require('./assets/fonts/OpenSans-Regular.ttf'),
   //   'open-sans-bold': require('./assets/fonts/OpenSans-Bold.ttf'),
   // })
-
+  
+  init()
+  .then(() => console.log('Database initialized'))
+  .catch((err) => {
+    console.log('Database failed to connect');
+    console.log(err.message)
+  });
+  
 
   useEffect(() => {
     

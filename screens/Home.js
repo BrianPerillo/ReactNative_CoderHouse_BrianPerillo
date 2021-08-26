@@ -13,6 +13,7 @@ import Icon from "react-native-vector-icons/Ionicons";
 import { Ionicons } from '@expo/vector-icons';
 import { SearchBar } from 'react-native-elements';
 import { categories } from '../data/categories';
+import { destacados } from '../data/destacados';
 import { items } from '../data/products';
 import { useDispatch } from 'react-redux';
 import { useSelector } from 'react-redux';
@@ -39,25 +40,18 @@ const Home = ({navigation}) => {
 
         <View style={styles.screen}>
 
-                      
-          <SearchBar
-            placeholder="Buscá un producto..."
-            onChangeText={text => handleOnChangeText(text)}
-            value={search}
-            // lightTheme='default'
-            showLoading
-            />
-            <View style={{marginBottom:30, alignItems:'center', backgroundColor:'#dcdcdc', padding:15}}>
+                    
+            <View style={{marginBottom:30, alignItems:'center', backgroundColor:'#e7eae7', padding:15}}>
                 <Text>Productos Destacados</Text>
             
                 <FlatList 
-                    data={categories} 
+                    data={destacados} 
                     horizontal={true}
                     renderItem={data => {
 
                     return (
                         // <Pressable onPress={()=>navigation.navigate('Producto', {item: data.item} )}>
-                        <Pressable style={{margin:10}} onPress={() => handleOnPress(data.item)}>
+                        <Pressable style={{margin:10}}>
                                 {/* <Image style={{height:80, width:80}} source={{uri: data.item.img}}/>
                                 <Text style={{fontSize:16}}>{data.item.name}</Text>
                                 <Ionicons name="arrow-forward-circle-sharp" size={24} color="orange"/>  */}

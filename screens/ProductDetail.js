@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
 import { addItem } from '../store/actions/cart.action';
+import { insertProduct } from '../db';
 
 const Producto = ({navigation, route}) => {
 
@@ -20,7 +21,7 @@ const Producto = ({navigation, route}) => {
 
         console.log("AGREGAR");
         dispatch(addItem(item,items,userId))
-
+        insertProduct(item.id, item.title, item.img, item.price)
     }
 
     return ( 

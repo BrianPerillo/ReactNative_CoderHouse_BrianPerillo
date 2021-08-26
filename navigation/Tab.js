@@ -11,6 +11,7 @@ import { Text } from 'react-native-elements';
 import { View } from 'react-native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { get_cart_first_time } from '../store/actions/cart.action';
+import { init } from '../db';
 import { useDispatch } from 'react-redux';
 import { useEffect } from 'react';
 import { useSelector } from 'react-redux';
@@ -27,7 +28,7 @@ const Tab = () => {
         dispatch(get_cart_first_time(userId)) //Ni bien carga (Después que el usuario se loguee) trae los datos de firebase para el resto de la app
 
     }, [])
-    
+
     
     return(
         

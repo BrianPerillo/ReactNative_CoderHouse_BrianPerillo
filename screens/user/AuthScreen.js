@@ -119,10 +119,10 @@ const AuthScreen = () => {
         </View>
         <View style={styles.footer}>
           <View style={styles.button}>
-            <Button title="ACCEDER" color={Colors.primary} onPress={onLoginHandler} />
+            <Button title="ACCEDER" color={Colors.acceder} onPress={onLoginHandler} />
           </View>
           <View style={styles.button}>
-            <Button title="REGISTRARSE" color={Colors.accent} onPress={onSignupHandler} />
+            <Button title="REGISTRARSE" color={Colors.registrarme} onPress={onSignupHandler} />
           </View>
         </View>
       </View>
